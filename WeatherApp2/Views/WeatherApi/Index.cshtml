@@ -1,0 +1,24 @@
+﻿@model WeatherApp2.Models.OpenWeatherMapModels
+
+<h1>WeatherNow</h1>
+
+<div id="apiDiv">
+    <h4>Select the City</h4>
+    <br />
+
+
+    @using (Html.BeginForm())
+    {
+        foreach (var city in Model.cities)
+        {
+            <span>
+                @Html.RadioButtonFor(m => m.cities, city.Value) @city.Key
+            </span>
+        }
+
+
+        <button class="btn btn-danger" name="submit">Submit</button>
+    }
+    <div id="message">@(new HtmlString(Model.apiResponse))</div>
+
+
