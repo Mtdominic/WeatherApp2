@@ -118,3 +118,6 @@ c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.csproj
 c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.csproj.CopyComplete
 c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.dll
 c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.pdb
+C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.InitialCreate.resources
+C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.csproj.GenerateResource.cache
+C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.WeatherSnaptoDB.resources

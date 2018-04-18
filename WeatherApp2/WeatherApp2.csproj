@@ -197,10 +197,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804170815116_InitialCreate.cs" />
+    <Compile Include="Migrations\201804170815116_InitialCreate.Designer.cs">
+      <DependentUpon>201804170815116_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804180636003_WeatherSnaptoDB.cs" />
+    <Compile Include="Migrations\201804180636003_WeatherSnaptoDB.Designer.cs">
+      <DependentUpon>201804180636003_WeatherSnaptoDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OpenWeatherMapModels.cs" />
+    <Compile Include="Models\WeatherSnap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -264,6 +274,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\WeatherApi\Index.cshtml" />
+    <Content Include="Views\WeatherApi\WeatherDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -280,6 +291,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804170815116_InitialCreate.resx">
+      <DependentUpon>201804170815116_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804180636003_WeatherSnaptoDB.resx">
+      <DependentUpon>201804180636003_WeatherSnaptoDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

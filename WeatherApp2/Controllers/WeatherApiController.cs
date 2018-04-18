@@ -9,13 +9,13 @@ using System.Web;
 using System.Web.Mvc;
 using WeatherApp2.Models;
 using WeatherApp2.Class;
-
+using WeatherApp2.ModelsView;
 
 namespace WeatherApp2.Controllers
 {
     public class WeatherApiController : Controller
     {
-        // GET: OpenWeatherMapMvc
+ // GET: OpenWeatherMapMvc
         public ActionResult Index()
         {
             OpenWeatherMapModels openWeatherMapModels = FillCity();
@@ -44,16 +44,16 @@ namespace WeatherApp2.Controllers
 
                 ResponseWeather rootObject = JsonConvert.DeserializeObject<ResponseWeather>(apiResponse);
 
-                StringBuilder sb = new StringBuilder();
-                sb.Append("<table><tr><th>Weather Description</th></tr>");
-                sb.Append("<tr><td>City:</td><td>" + rootObject.name + "</td></tr>");
-                sb.Append("<tr><td>Country:</td><td>" + rootObject.sys.country + "</td></tr>");
-                sb.Append("<tr><td>Wind:</td><td>" + rootObject.wind.speed + " Km/h</td></tr>");
-                sb.Append("<tr><td>Current Temperature:</td><td>" + rootObject.main.temp + " °C</td></tr>");
-                sb.Append("<tr><td>Humidity:</td><td>" + rootObject.main.humidity + "</td></tr>");
-                sb.Append("<tr><td>Weather:</td><td>" + rootObject.weather[0].description + "</td></tr>");
-                sb.Append("</table>");
-                openWeatherMapModels.apiResponse = sb.ToString();
+                WeatherSnap weatherSnap = new WeatherSnap();
+                weatherSnap.CityName = rootObject.name;
+                weatherSnap.Temp = rootObject.main.temp;
+                weatherSnap.Humidity = rootObject.main.humidity;
+                using (var context = new ApplicationDbContext())
+                {
+                    context.Weather.Add(weatherSnap);
+                    context.SaveChanges();
+                }
+                return View("WeatherDetails", weatherSnap);
             }
             else
             {

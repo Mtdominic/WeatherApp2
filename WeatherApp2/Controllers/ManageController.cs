@@ -17,7 +17,7 @@ namespace WeatherApp2.Controllers
         private ApplicationUserManager _userManager;
 
         public ManageController()
-        {
+        { 
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

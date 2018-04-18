@@ -1,0 +1,37 @@
+﻿@model WeatherApp2.ModelsView.WeatherSnap
+
+@{
+    ViewBag.Title = "Weather Details";
+}
+
+<h2>Weather Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CityName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Temp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Humidity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Humidity)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Search Again", "Index")
+</p>
