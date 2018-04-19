@@ -10,12 +10,14 @@ using System.Web.Mvc;
 using WeatherApp2.Models;
 using WeatherApp2.Class;
 using WeatherApp2.ModelsView;
+using System.Threading.Tasks;
+using Hangfire;
 
 namespace WeatherApp2.Controllers
 {
     public class WeatherApiController : Controller
     {
- // GET: OpenWeatherMapMvc
+        // GET: OpenWeatherMapMvc
         public ActionResult Index()
         {
             OpenWeatherMapModels openWeatherMapModels = FillCity();
@@ -23,7 +25,7 @@ namespace WeatherApp2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string cities)
+        public async Task<ActionResult> Index(string cities)
         {
             OpenWeatherMapModels openWeatherMapModels = FillCity();
 
@@ -51,7 +53,7 @@ namespace WeatherApp2.Controllers
                 using (var context = new ApplicationDbContext())
                 {
                     context.Weather.Add(weatherSnap);
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                 }
                 return View("WeatherDetails", weatherSnap);
             }

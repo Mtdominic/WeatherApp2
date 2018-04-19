@@ -6,6 +6,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using WeatherApp2.Models;
+using Hangfire;
+
+[assembly: OwinStartup(typeof(WeatherApp2.Startup))]
 
 namespace WeatherApp2
 {
@@ -34,7 +37,7 @@ namespace WeatherApp2
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -63,6 +66,7 @@ namespace WeatherApp2
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
         }
     }
 }
