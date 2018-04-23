@@ -118,9 +118,6 @@ c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.csproj
 c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.csproj.CopyComplete
 c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.dll
 c:\users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.pdb
-C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.InitialCreate.resources
-C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.csproj.GenerateResource.cache
-C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.WeatherSnaptoDB.resources
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\Hangfire.Core.dll
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\Hangfire.SqlServer.dll
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\Hangfire.Core.xml
@@ -128,5 +125,5 @@ C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\Hangfire.SqlServer.xml
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\es\Hangfire.Core.resources.dll
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\zh\Hangfire.Core.resources.dll
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\zh-TW\Hangfire.Core.resources.dll
-C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.AddDateTimetoList.resources
-C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.DateFormat.resources
+C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.InitialNewDB.resources
+C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.csproj.GenerateResource.cache

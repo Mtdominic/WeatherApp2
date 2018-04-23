@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -25,7 +26,7 @@ namespace WeatherApp2.Models
             : base("WeatherContext", throwIfV1Schema: false)
         {
         }
-
+        
         public DbSet<WeatherSnap> Weather { get; set; }
 
         public static ApplicationDbContext Create()

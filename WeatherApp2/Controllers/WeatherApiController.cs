@@ -17,13 +17,31 @@ namespace WeatherApp2.Controllers
 {
     public class WeatherApiController : Controller
     {
+
+
         public ActionResult GetAllCities()
         {
             List<string> cities = new List<string>();
             cities.Add("Rzeszów");
-            cities.Add("Berlin");
             cities.Add("Sosnowiec");
             cities.Add("Warszawa");
+            cities.Add("Barcelona");
+            cities.Add("Berlin");
+            cities.Add("Vieux Lyon");
+            cities.Add("Buenos Aires");
+            cities.Add("Sidney");
+            cities.Add("Tirana");
+            cities.Add("Rotterdam");
+            cities.Add("Split");
+            cities.Add("Sassari");
+            cities.Add("Lattes");
+            cities.Add("Dabas");
+            cities.Add("Kolonie Lerchenau");
+            cities.Add("Port Hedland");
+            cities.Add("Oslo");
+
+
+
 
             if (cities != null)
             {
@@ -63,8 +81,11 @@ namespace WeatherApp2.Controllers
             return new EmptyResult();
         }
 
-        public ActionResult Index()
+
+
+        public ActionResult Index(string searchString)
         {
+
             using (var context = new ApplicationDbContext())
             {
                 var cities_data = context.Weather.ToList();

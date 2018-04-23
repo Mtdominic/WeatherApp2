@@ -203,21 +203,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804170815116_InitialCreate.cs" />
-    <Compile Include="Migrations\201804170815116_InitialCreate.Designer.cs">
-      <DependentUpon>201804170815116_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804180636003_WeatherSnaptoDB.cs" />
-    <Compile Include="Migrations\201804180636003_WeatherSnaptoDB.Designer.cs">
-      <DependentUpon>201804180636003_WeatherSnaptoDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804230641446_AddDateTimetoList.cs" />
-    <Compile Include="Migrations\201804230641446_AddDateTimetoList.Designer.cs">
-      <DependentUpon>201804230641446_AddDateTimetoList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804230709462_DateFormat.cs" />
-    <Compile Include="Migrations\201804230709462_DateFormat.Designer.cs">
-      <DependentUpon>201804230709462_DateFormat.cs</DependentUpon>
+    <Compile Include="Migrations\201804230748082_InitialNewDB.cs" />
+    <Compile Include="Migrations\201804230748082_InitialNewDB.Designer.cs">
+      <DependentUpon>201804230748082_InitialNewDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -307,17 +295,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804170815116_InitialCreate.resx">
-      <DependentUpon>201804170815116_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804180636003_WeatherSnaptoDB.resx">
-      <DependentUpon>201804180636003_WeatherSnaptoDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804230641446_AddDateTimetoList.resx">
-      <DependentUpon>201804230641446_AddDateTimetoList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804230709462_DateFormat.resx">
-      <DependentUpon>201804230709462_DateFormat.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804230748082_InitialNewDB.resx">
+      <DependentUpon>201804230748082_InitialNewDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

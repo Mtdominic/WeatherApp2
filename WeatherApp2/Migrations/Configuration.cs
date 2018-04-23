@@ -10,7 +10,6 @@ namespace WeatherApp2.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WeatherApp2.Models.ApplicationDbContext";
         }
 
         protected override void Seed(WeatherApp2.Models.ApplicationDbContext context)

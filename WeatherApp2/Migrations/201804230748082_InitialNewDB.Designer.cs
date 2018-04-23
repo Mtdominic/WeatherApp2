@@ -7,13 +7,13 @@ namespace WeatherApp2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class InitialNewDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialNewDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804170815116_InitialCreate"; }
+            get { return "201804230748082_InitialNewDB"; }
         }
         
         string IMigrationMetadata.Source

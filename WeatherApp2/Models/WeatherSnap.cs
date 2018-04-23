@@ -9,7 +9,7 @@ namespace WeatherApp2.ModelsView
     public class WeatherSnap
     {
         public int Id { get; set; }
-        [DisplayFormat(DataFormatString = "{0:hh:mm:ss   |   yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm:ss | yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Time { get; set; }
         [Display(Name = "City: ")]
         public string CityName { get; set; }

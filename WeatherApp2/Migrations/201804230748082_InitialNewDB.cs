@@ -3,7 +3,7 @@ namespace WeatherApp2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialNewDB : DbMigration
     {
         public override void Up()
         {
@@ -75,6 +75,18 @@ namespace WeatherApp2.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.WeatherSnaps",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Time = c.DateTime(nullable: false),
+                        CityName = c.String(),
+                        Temp = c.Double(nullable: false),
+                        Humidity = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()
@@ -89,6 +101,7 @@ namespace WeatherApp2.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropTable("dbo.WeatherSnaps");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
