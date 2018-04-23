@@ -128,3 +128,5 @@ C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\Hangfire.SqlServer.xml
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\es\Hangfire.Core.resources.dll
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\zh\Hangfire.Core.resources.dll
 C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\bin\zh-TW\Hangfire.Core.resources.dll
+C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.AddDateTimetoList.resources
+C:\Users\ideo9\source\repos\WeatherApp2\WeatherApp2\obj\Debug\WeatherApp2.Migrations.DateFormat.resources

@@ -2,6 +2,7 @@
 using Owin;
 using Hangfire;
 using System;
+using WeatherApp2.Controllers;
 
 [assembly: OwinStartupAttribute(typeof(WeatherApp2.Startup))]
 
@@ -13,7 +14,8 @@ namespace WeatherApp2
         {
             ConfigureAuth(app);
             GlobalConfiguration.Configuration.UseSqlServerStorage("WeatherContext");
-            app.UseHangfireDashboard();
+            WeatherApiController obj = new WeatherApiController();
+            RecurringJob.AddOrUpdate(() => obj.GetAllCities(), "*/5 * * * *");
             app.UseHangfireDashboard();
             app.UseHangfireServer();
         }

@@ -17,67 +17,74 @@ namespace WeatherApp2.Controllers
 {
     public class WeatherApiController : Controller
     {
-        // GET: OpenWeatherMapMvc
-        public ActionResult Index()
+        public ActionResult GetAllCities()
         {
-            OpenWeatherMapModels openWeatherMapModels = FillCity();
-            return View(openWeatherMapModels);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Index(string cities)
-        {
-            OpenWeatherMapModels openWeatherMapModels = FillCity();
+            List<string> cities = new List<string>();
+            cities.Add("Rzeszów");
+            cities.Add("Berlin");
+            cities.Add("Sosnowiec");
+            cities.Add("Warszawa");
 
             if (cities != null)
             {
-                /*Calling API http://openweathermap.org/api */
-                string apiKey = "7984b03cb110d3afad35dcbc6864a8af";
-                HttpWebRequest apiRequest = WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?id=" + cities + "&appid=" + apiKey + "&units=metric") as HttpWebRequest;
-
-                string apiResponse = "";
-                using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+                foreach (var city in cities)
                 {
-                    StreamReader reader = new StreamReader(response.GetResponseStream());
-                    apiResponse = reader.ReadToEnd();
+
+                    /*Calling API http://openweathermap.org/api */
+                    string apiKey = "7984b03cb110d3afad35dcbc6864a8af";
+                    HttpWebRequest apiRequest = WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric") as HttpWebRequest;
+
+                    string apiResponse = "";
+                    using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+                    {
+                        StreamReader reader = new StreamReader(response.GetResponseStream());
+                        apiResponse = reader.ReadToEnd();
+                    }
+
+
+
+                    ResponseWeather rootObject = JsonConvert.DeserializeObject<ResponseWeather>(apiResponse);
+
+                    WeatherSnap weatherSnap = new WeatherSnap();
+                    weatherSnap.Time = DateTime.Now;
+                    weatherSnap.CityName = rootObject.name;
+                    weatherSnap.Temp = rootObject.main.temp;
+                    weatherSnap.Humidity = rootObject.main.humidity;
+                    using (var context = new ApplicationDbContext())
+                    {
+                        context.Weather.Add(weatherSnap);
+                        context.SaveChanges();
+                    }
+
                 }
 
-
-
-                ResponseWeather rootObject = JsonConvert.DeserializeObject<ResponseWeather>(apiResponse);
-
-                WeatherSnap weatherSnap = new WeatherSnap();
-                weatherSnap.CityName = rootObject.name;
-                weatherSnap.Temp = rootObject.main.temp;
-                weatherSnap.Humidity = rootObject.main.humidity;
-                using (var context = new ApplicationDbContext())
-                {
-                    context.Weather.Add(weatherSnap);
-                    await context.SaveChangesAsync();
-                }
-                return View("WeatherDetails", weatherSnap);
             }
-            else
-            {
-                if (Request.Form["submit"] != null)
-                {
-                    openWeatherMapModels.apiResponse = "► Select City";
-                }
-            }
-            return View(openWeatherMapModels);
+
+            return new EmptyResult();
         }
 
-        public OpenWeatherMapModels FillCity()
+        public ActionResult Index()
         {
-            OpenWeatherMapModels openWeatherMapModels = new OpenWeatherMapModels();
-            openWeatherMapModels.cities = new Dictionary<string, string>();
-            openWeatherMapModels.cities.Add("Rzeszów", "7532474");
-            openWeatherMapModels.cities.Add("Leżajsk", "7532578");
-            openWeatherMapModels.cities.Add("Warszawa", "6695624");
-            openWeatherMapModels.cities.Add("Sosnowiec", "7532189");
-            return openWeatherMapModels;
-
-
+            using (var context = new ApplicationDbContext())
+            {
+                var cities_data = context.Weather.ToList();
+                return View(cities_data);
+            }
         }
+
+
+
+
+        //public OpenWeatherMapModels FillCity()
+        //{
+        //    OpenWeatherMapModels openWeatherMapModels = new OpenWeatherMapModels();
+        //    openWeatherMapModels.cities = new Dictionary<string, string>();
+        //    openWeatherMapModels.cities.Add("Rzeszów", "Rzeszów");
+        //    openWeatherMapModels.cities.Add("Leżajsk", "Leżajsk");
+        //    openWeatherMapModels.cities.Add("Warszawa", "Warszawa");
+        //    openWeatherMapModels.cities.Add("Sosnowiec", "Sosnowiec");
+        //    return openWeatherMapModels;
+
+
     }
 }

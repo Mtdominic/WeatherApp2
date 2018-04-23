@@ -1,24 +1,44 @@
-﻿@model WeatherApp2.Models.OpenWeatherMapModels
+﻿@model IEnumerable<WeatherApp2.ModelsView.WeatherSnap>
 
-<h1>Weather Now</h1>
+@{
+    ViewBag.Title = "Index";
+}
 
-<div id="apiDiv">
-    <h4>Select the City</h4>
-    <br />
+<h2>Weather List</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Humidity)
+        </th>
+        <th></th>
+    </tr>
 
-    @using (Html.BeginForm())
-    {
-        foreach (var city in Model.cities)
-        {
-            <span>
-                @Html.RadioButtonFor(m => m.cities, city.Value) @city.Key
-            </span>
-        }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temp) °C
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Humidity) %
+        </td>
+        
+    </tr>
+}
 
-
-        <button class="btn btn-danger" name="submit">Submit</button>
-    }
-    <div id="message">@(new HtmlString(Model.apiResponse))</div>
-
-
+</table>
