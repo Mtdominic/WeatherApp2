@@ -1,44 +1,118 @@
-﻿@model IEnumerable<WeatherApp2.ModelsView.WeatherSnap>
+﻿@model  IEnumerable<WeatherApp2.ModelsView.WeatherSnap>
+
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Weather Charts";
+
 }
 
-<h2>Weather List</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="~/Scripts/Charts/highcharts.js"></script>
+    <script src="~/Scripts/Charts/exporting.js"></script>
+    <script>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Time)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Temp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Humidity)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Temp) °C
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Humidity) %
-        </td>
-        
-    </tr>
-}
+        $(document).ready(function () {
+            $("button").click(function () {
 
-</table>
+                var city = $("#SearchString").val();
+
+                $.getJSON("/WeatherApi/GetData?SearchString=" + city, function (data) {
+
+                    Highcharts.chart('containerTemp', {
+                        chart: {
+                            type: 'line'
+                        },
+                        title: {
+                            text: 'Temperature in: ' + city
+                        },
+                        subtitle: {
+                            text: 'Source: OpenWeatherMap'
+                        },
+                        xAxis: {
+                            categories: data.Times
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Temperature (°C) /Hour'
+                            }
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: false
+                            }
+                        },
+                        series: [{
+                            name: city,
+                            data: data.Temps
+                        }]
+                    });
+
+                    Highcharts.chart('containerHum', {
+                        chart: {
+                            type: 'line'
+                        },
+                        title: {
+                            text: 'Humidity in: ' + city
+                        },
+                        subtitle: {
+                            text: 'Source: OpenWeatherMap'
+                        },
+                        xAxis: {
+                            categories: data.Times
+                        },
+
+                        yAxis: {
+                            title: {
+                                text: 'Humidity (%) / Hour'
+                            }
+                        },
+                        plotOptions: {
+                            line: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                enableMouseTracking: false
+                            }
+                        },
+                        series: [{
+                            name: city,
+                            data: data.Humidities
+                        }]
+                    });
+
+                });
+
+            });
+        });
+
+
+    </script>
+</head>
+
+<body>
+
+    <div class="jumbotron">
+        <form>
+            <p>
+                <input id="SearchString" type="text" placeholder="City Name" />
+                <button type="button">Search</button>
+            </p>
+        </form>
+
+        <div id="containerTemp" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div id="containerHum" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+
+
+
+
+
+</body>
+</html>
+

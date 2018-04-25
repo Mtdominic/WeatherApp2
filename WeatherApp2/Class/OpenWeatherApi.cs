@@ -26,16 +26,16 @@ namespace WeatherApp2.Class
         public class Main
         {
             public double temp { get; set; }
-            public int pressure { get; set; }
+            public float pressure { get; set; }
             public int humidity { get; set; }
-            public int temp_min { get; set; }
-            public int temp_max { get; set; }
+            public float temp_min { get; set; }
+            public float temp_max { get; set; }
         }
 
         public class Wind
         {
             public double speed { get; set; }
-            public int deg { get; set; }
+            public float deg { get; set; }
         }
 
         public class Clouds

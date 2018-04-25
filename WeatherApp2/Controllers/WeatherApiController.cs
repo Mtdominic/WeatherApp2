@@ -13,14 +13,17 @@ using WeatherApp2.ModelsView;
 using System.Threading.Tasks;
 using Hangfire;
 
+
 namespace WeatherApp2.Controllers
 {
     public class WeatherApiController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
 
-
+        [Authorize]
         public ActionResult GetAllCities()
         {
+
             List<string> cities = new List<string>();
             cities.Add("Rzeszów");
             cities.Add("Sosnowiec");
@@ -41,8 +44,6 @@ namespace WeatherApp2.Controllers
             cities.Add("Oslo");
 
 
-
-
             if (cities != null)
             {
                 foreach (var city in cities)
@@ -59,8 +60,6 @@ namespace WeatherApp2.Controllers
                         apiResponse = reader.ReadToEnd();
                     }
 
-
-
                     ResponseWeather rootObject = JsonConvert.DeserializeObject<ResponseWeather>(apiResponse);
 
                     WeatherSnap weatherSnap = new WeatherSnap();
@@ -73,39 +72,65 @@ namespace WeatherApp2.Controllers
                         context.Weather.Add(weatherSnap);
                         context.SaveChanges();
                     }
-
                 }
-
             }
 
             return new EmptyResult();
         }
 
+        //[Authorize]
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-
-        public ActionResult Index(string searchString)
+        [HttpGet]
+        public ActionResult GetData(string SearchString)
         {
 
             using (var context = new ApplicationDbContext())
             {
-                var cities_data = context.Weather.ToList();
-                return View(cities_data);
+                //var cities_data = context.Weather.ToList();
+
+
+
+                if (!String.IsNullOrEmpty(SearchString))
+                {
+                    var settings = new JsonSerializerSettings { DateFormatString = "HH:mm" };
+                    var cities = context.Weather.Where(q => q.CityName == SearchString).ToList();
+                    List<WeatherSnapDto> weatherSnapDtos = new List<WeatherSnapDto>();
+                    foreach (var city in cities)
+                    {
+                        WeatherSnapDto weatherSnapDto = new WeatherSnapDto();
+                        weatherSnapDto.Time = JsonConvert.SerializeObject(city.Time,settings);
+                        weatherSnapDto.Temp = city.Temp;
+                        weatherSnapDto.Humidity = city.Humidity;
+                        weatherSnapDtos.Add(weatherSnapDto);
+                    }
+
+                    var temperatures = weatherSnapDtos.Select(c => c.Temp).ToList();
+                    var times = weatherSnapDtos.Select(t => t.Time).ToList();
+                    var humidities = weatherSnapDtos.Select(h => h.Humidity).ToList();
+
+                    WeatherSnapJson weatherSnapJson = new WeatherSnapJson();
+                    weatherSnapJson.Temps = temperatures;
+                    weatherSnapJson.Times = times;
+                    weatherSnapJson.Humidities = humidities;
+
+
+                    return Json(weatherSnapJson, JsonRequestBehavior.AllowGet);
+
+                }
+                else
+                {
+                    var cities = context.Weather.ToList();
+                    return Json(cities);
+                }
+
+
             }
+
         }
-
-
-
-
-        //public OpenWeatherMapModels FillCity()
-        //{
-        //    OpenWeatherMapModels openWeatherMapModels = new OpenWeatherMapModels();
-        //    openWeatherMapModels.cities = new Dictionary<string, string>();
-        //    openWeatherMapModels.cities.Add("Rzeszów", "Rzeszów");
-        //    openWeatherMapModels.cities.Add("Leżajsk", "Leżajsk");
-        //    openWeatherMapModels.cities.Add("Warszawa", "Warszawa");
-        //    openWeatherMapModels.cities.Add("Sosnowiec", "Sosnowiec");
-        //    return openWeatherMapModels;
-
-
     }
 }
+
