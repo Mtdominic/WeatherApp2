@@ -12,7 +12,7 @@ using WeatherApp2.Class;
 using WeatherApp2.ModelsView;
 using System.Threading.Tasks;
 using Hangfire;
-
+using System.Globalization;
 
 namespace WeatherApp2.Controllers
 {
@@ -27,7 +27,6 @@ namespace WeatherApp2.Controllers
             List<string> cities = new List<string>();
             cities.Add("Rzeszów");
             cities.Add("Sosnowiec");
-            cities.Add("Warszawa");
             cities.Add("Barcelona");
             cities.Add("Berlin");
             cities.Add("Vieux Lyon");
@@ -78,7 +77,7 @@ namespace WeatherApp2.Controllers
             return new EmptyResult();
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -96,13 +95,13 @@ namespace WeatherApp2.Controllers
 
                 if (!String.IsNullOrEmpty(SearchString))
                 {
-                    var settings = new JsonSerializerSettings { DateFormatString = "HH:mm" };
+
                     var cities = context.Weather.Where(q => q.CityName == SearchString).ToList();
                     List<WeatherSnapDto> weatherSnapDtos = new List<WeatherSnapDto>();
                     foreach (var city in cities)
                     {
                         WeatherSnapDto weatherSnapDto = new WeatherSnapDto();
-                        weatherSnapDto.Time = JsonConvert.SerializeObject(city.Time,settings);
+                        weatherSnapDto.Time = city.Time.ToString("HH:mm");
                         weatherSnapDto.Temp = city.Temp;
                         weatherSnapDto.Humidity = city.Humidity;
                         weatherSnapDtos.Add(weatherSnapDto);
@@ -116,20 +115,15 @@ namespace WeatherApp2.Controllers
                     weatherSnapJson.Temps = temperatures;
                     weatherSnapJson.Times = times;
                     weatherSnapJson.Humidities = humidities;
-
-
+                    
                     return Json(weatherSnapJson, JsonRequestBehavior.AllowGet);
-
                 }
                 else
                 {
                     var cities = context.Weather.ToList();
                     return Json(cities);
                 }
-
-
             }
-
         }
     }
 }

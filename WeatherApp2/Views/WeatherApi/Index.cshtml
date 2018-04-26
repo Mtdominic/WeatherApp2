@@ -6,113 +6,127 @@
 
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <script src="~/Scripts/Charts/highcharts.js"></script>
-    <script src="~/Scripts/Charts/exporting.js"></script>
-    <script>
+<script src="~/Scripts/Charts/highcharts.js"></script>
+<script src="~/Scripts/Charts/exporting.js"></script>
+<script src="~/Scripts/Charts/dark-unica.js"></script>
 
 
-        $(document).ready(function () {
-            $("button").click(function () {
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="content">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">City:</span>
+                </div>
+                <input id="SearchString" type="text" class="form-control" aria-label="Large" placeholder="Your city name" aria-describedby="inputGroup-sizing-sm basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 
-                var city = $("#SearchString").val();
+<div class="container-fluid">
+    <div class="row">
+        <div class="col" id="containerTemp" style="min-width: 600px; height: 350px; "></div>
+        <br />
+        <div class="col" id="containerHum" style="min-width: 600px; height: 350px; margin: 0 auto"></div>
+    </div>
+</div>
 
-                $.getJSON("/WeatherApi/GetData?SearchString=" + city, function (data) {
+<script>
 
-                    Highcharts.chart('containerTemp', {
-                        chart: {
-                            type: 'line'
-                        },
+    $(document).ready(function () {
+        $("button").click(function () {
+
+            var city = $("#SearchString").val();
+
+            $.getJSON("/WeatherApi/GetData?SearchString=" + city, function (data) {
+
+                Highcharts.chart('containerTemp', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Temperature in: ' + city
+                    },
+                    subtitle: {
+                        text: 'Source: OpenWeatherMap'
+                    },
+                    xAxis: {
+                        categories: data.Times
+
+                    },
+                    yAxis: {
+                        min: 0,
                         title: {
-                            text: 'Temperature in: ' + city
-                        },
-                        subtitle: {
-                            text: 'Source: OpenWeatherMap'
-                        },
-                        xAxis: {
-                            categories: data.Times
-                        },
-                        yAxis: {
-                            title: {
-                                text: 'Temperature (°C) /Hour'
-                            }
-                        },
-                        plotOptions: {
-                            line: {
-                                dataLabels: {
-                                    enabled: true
-                                },
-                                enableMouseTracking: false
-                            }
-                        },
-                        series: [{
-                            name: city,
-                            data: data.Temps
-                        }]
-                    });
+                            text: 'Temperature (°C) /Hour'
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} °C</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: city,
+                        data: data.Temps
 
-                    Highcharts.chart('containerHum', {
-                        chart: {
-                            type: 'line'
-                        },
+
+                    }]
+                });
+
+                Highcharts.chart('containerHum', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Humidity in: ' + city
+                    },
+
+                    xAxis: {
+                        categories: data.Times
+                    },
+
+                    yAxis: {
                         title: {
-                            text: 'Humidity in: ' + city
-                        },
-                        subtitle: {
-                            text: 'Source: OpenWeatherMap'
-                        },
-                        xAxis: {
-                            categories: data.Times
-                        },
-
-                        yAxis: {
-                            title: {
-                                text: 'Humidity (%) / Hour'
-                            }
-                        },
-                        plotOptions: {
-                            line: {
-                                dataLabels: {
-                                    enabled: true
-                                },
-                                enableMouseTracking: false
-                            }
-                        },
-                        series: [{
-                            name: city,
-                            data: data.Humidities
-                        }]
-                    });
-
+                            text: 'Humidity (%) / Hour'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [{
+                        name: city,
+                        data: data.Humidities
+                    }]
                 });
 
             });
+
         });
+    });
 
-
-    </script>
-</head>
-
-<body>
-
-    <div class="jumbotron">
-        <form>
-            <p>
-                <input id="SearchString" type="text" placeholder="City Name" />
-                <button type="button">Search</button>
-            </p>
-        </form>
-
-        <div id="containerTemp" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        <div id="containerHum" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    </div>
+</script>
 
 
 
 
 
-</body>
-</html>
 

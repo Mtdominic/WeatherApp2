@@ -1,6 +1,9 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background-color: #1a1a1a;
+    color: #ccc;
+    padding-top: 100px;
+    padding-bottom: 10px;
+    overflow-y: hidden;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -20,7 +23,20 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 370px;
 }
 
+hr {
+    border-top: 1px solid #00a4f3;
+}
+
+/*.content {
+    position: absolute;
+    left: 50%;
+    top: 12%;
+    transform: translate(-50%,-50%);*/
+
+ .form-control {
+     text-align: center;
+ }
 
