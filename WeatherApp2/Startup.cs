@@ -15,8 +15,8 @@ namespace WeatherApp2
             ConfigureAuth(app);
             GlobalConfiguration.Configuration.UseSqlServerStorage("WeatherContext");
             WeatherApiController obj = new WeatherApiController();
-            //Each 15 "*/15 * * * *"
-            RecurringJob.AddOrUpdate(() => obj.GetAllCities(), Cron.Hourly);
+            
+            RecurringJob.AddOrUpdate(() => obj.GetAllCities(), "*/5 * * * *");
             app.UseHangfireDashboard();
             app.UseHangfireServer();
         }

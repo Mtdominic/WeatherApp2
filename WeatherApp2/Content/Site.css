@@ -4,6 +4,8 @@
     padding-top: 100px;
     padding-bottom: 10px;
     overflow-y: hidden;
+    font-family: 'Unica One', 'Regular';
+    text-transform: uppercase;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -30,13 +32,9 @@ hr {
     border-top: 1px solid #00a4f3;
 }
 
-/*.content {
-    position: absolute;
-    left: 50%;
-    top: 12%;
-    transform: translate(-50%,-50%);*/
 
- .form-control {
-     text-align: center;
- }
+.form-control {
+    text-align: center;
+    text-transform: uppercase
+}
 

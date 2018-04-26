@@ -3,15 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
+    <link rel="icon" href="@Url.Content("~/content/favicon.ico")" />
     <title>@ViewBag.Title - OWP/ Dominic Materna</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">@Html.ActionLink("Weather, try it!", "Index", "WeatherApi", new { area = "" }, new { @class = "navbar-brand" })</span>
+            <span class="navbar-brand mb-0 h1">
+                <img src="/Content/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                @Html.ActionLink("Weather, try it!", "Index", "WeatherApi", new { area = "" }, new { @class = "navbar-brand" })
+            </span>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,9 +27,9 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
                     <li class="nav-item active">
-                        @Html.ActionLink("Home |", "Index", "Home")
-                        @Html.ActionLink("About |", "About", "Home")
-                        @Html.ActionLink("Contact", "Contact", "Home")
+                        @Html.ActionLink("HOME |", "Index", "Home")
+                        @Html.ActionLink("ABOUT |", "About", "Home")
+                        @Html.ActionLink("CONTACT", "Contact", "Home")
                     </li>
                 </ul>
                 @Html.Partial("_LoginPartial")

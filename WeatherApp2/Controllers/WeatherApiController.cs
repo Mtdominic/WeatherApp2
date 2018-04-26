@@ -25,7 +25,7 @@ namespace WeatherApp2.Controllers
         {
 
             List<string> cities = new List<string>();
-            cities.Add("Rzeszów");
+            cities.Add("Rzeszów,pl");
             cities.Add("Sosnowiec");
             cities.Add("Barcelona");
             cities.Add("Berlin");
@@ -41,7 +41,14 @@ namespace WeatherApp2.Controllers
             cities.Add("Kolonie Lerchenau");
             cities.Add("Port Hedland");
             cities.Add("Oslo");
-
+            cities.Add("Leżajsk");
+            cities.Add("Madrid");
+            cities.Add("Oulu");
+            cities.Add("Santiago");
+            cities.Add("Adelaide");
+            cities.Add("Wellington");
+            cities.Add("Nuuk");
+            cities.Add("Glasgow");
 
             if (cities != null)
             {
